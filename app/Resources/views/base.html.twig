@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Bem-Vindo - Livraria!{% endblock %}</title>
+        <title>{% block title %}Livraria{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
@@ -33,8 +33,10 @@
                 </form>
             </div>
         </div>
-    </nav>
-{% block body %}{% endblock %}
+    </nav> 
+    <div class="container">
+    {% block body %}{% endblock %}
+</div>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
