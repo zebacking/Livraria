@@ -45,6 +45,140 @@ class Produtos
      */
     private $imagem;
     
+    /**
+     * @ORM\ManyToOne(targetEntity="Genero")
+     * @ORM\JoinColumn(name="genero_id", referencedColumnName="id")
+     */
+    private $genero;
     
-    
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     *
+     * @return Produtos
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    /**
+     * Get nome
+     *
+     * @return string
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * Set quantidade
+     *
+     * @param integer $quantidade
+     *
+     * @return Produtos
+     */
+    public function setQuantidade($quantidade)
+    {
+        $this->quantidade = $quantidade;
+
+        return $this;
+    }
+
+    /**
+     * Get quantidade
+     *
+     * @return integer
+     */
+    public function getQuantidade()
+    {
+        return $this->quantidade;
+    }
+
+    /**
+     * Set preco
+     *
+     * @param string $preco
+     *
+     * @return Produtos
+     */
+    public function setPreco($preco)
+    {
+        $this->preco = $preco;
+
+        return $this;
+    }
+
+    /**
+     * Get preco
+     *
+     * @return string
+     */
+    public function getPreco()
+    {
+        return $this->preco;
+    }
+
+    /**
+     * Set tipo
+     *
+     * @param string $tipo
+     *
+     * @return Produtos
+     */
+    public function setTipo($tipo)
+    {
+        $this->tipo = $tipo;
+
+        return $this;
+    }
+
+    /**
+     * Get tipo
+     *
+     * @return string
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+
+    /**
+     * Set imagem
+     *
+     * @param string $imagem
+     *
+     * @return Produtos
+     */
+    public function setImagem($imagem)
+    {
+        $this->imagem = $imagem;
+
+        return $this;
+    }
+
+    /**
+     * Get imagem
+     *
+     * @return string
+     */
+    public function getImagem()
+    {
+        return $this->imagem;
+    }
 }

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gênero</h1>
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Nome</th>
+                <td>{{ genero.nome }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('genero_index') }}" class="btn btn-default"><span class="glyphicon glyphicon-step-backward"></span> Voltar</a>
+
+    <a href="{{ path('genero_edit', { 'id': genero.id }) }}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+    <div style="float:left;">
+        {{ form_start(delete_form) }}
+        <button type="submit" value="Delete" class="btn btn-danger">Apagar</button>
+        {{ form_end(delete_form) }}
+    </div>
+{% endblock %}

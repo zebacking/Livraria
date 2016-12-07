@@ -25,9 +25,7 @@ class ProdutosType extends AbstractType
                         "Revista"=>2
                     )
                 ))
-                ->add('imagem')
-                ->add('genero')       
-                 ;
+                ->add('imagem')        ;
     }
     
     /**
