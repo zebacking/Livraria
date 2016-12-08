@@ -20,7 +20,7 @@ class ProdutosType extends AbstractType
                 ->add('preco')
                 ->add('tipo', ChoiceType::class, array(
                     'choices'=> array(
-                        "Selecione"=>0,
+                        "Selecione"=>null,
                         "Livro"=>1,
                         "Revista"=>2
                     )
