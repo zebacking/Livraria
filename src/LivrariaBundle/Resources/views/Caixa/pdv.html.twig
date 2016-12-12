@@ -9,21 +9,29 @@
             <div class="panel panel-primary">
 
                 <div class="panel-body">
-                    <div class="input-group">
-                        <span class="input-group-addon" ><span class="glyphicon glyphicon-barcode"></span></span>
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
-                        </span>
+                    <form action="{{ path('pesquisar_produto') }}" method="post" id="form-produto">
+                        <div class="input-group">
+                            <span class="input-group-addon" ><span class="glyphicon glyphicon-barcode"></span></span>
+                            <input type="text" class="form-control" name="codigo" id="cod-produto">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+                            </span>
 
-                    </div>
-                    <div class="thumbnail">
+                        </div>
+                    </form>
+                    <hr>
+                    
+                    <div class="thumbnail hide" id="desc-produto">
                         <img src="http://lorempixel.com/240/240/" width="240" height="240">
                         <div class="caption">
                             <h3>Nome do Produto</h3>
                             <p>Descrição do Produto</p>
                             <p>Preço unitário</p>
                         </div>
+                    </div>
+                    
+                    <div class="alert alert-danger hide" id="alerta">
+                        Produto não Encontrado
                     </div>
                 </div>
             </div>
@@ -35,23 +43,20 @@
                     <h3 class="panel-title">Carrinho de Compras</h3>
                 </div>
                 <div class="panel-body">
-                    <ol> 
-                        <li>produto xxxxx - valor R$ 123,50</li>
-                        <li>produto xxxxx - valor R$ 123,50</li>
-                        <li>produto xxxxx - valor R$ 123,50</li>
-                        <li>produto xxxxx - valor R$ 123,50</li>
-                        <li>produto xxxxx - valor R$ 123,50</li>
-
+                    <ol id="lista-produtos"> 
 
                     </ol>
                 </div>
                 <div class="panel-footer text-right">
-                    Total a pagar: R$ 00,00
+                    Total a pagar: R$ 
+                    <span id="valor-total"> </span>
                 </div>
             </div>
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-estorno">Estornar Item</button>
-            <button type="button" class="btn btn-danger">Cancelar Venda</button>
-            <button type="button" class="btn btn-success">Finalizar Venda</button>
+            <div class="text-right">
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-estorno">Estornar Item</button>
+                <button type="button" class="btn btn-danger">Cancelar Venda</button>
+                <button type="button" class="btn btn-success">Finalizar Venda</button>
+            </div>
         </div>
     </div>
 
@@ -80,4 +85,51 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            listagemProdutos();
+            $('#form-produto').submit(function (evento) {
+                evento.preventDefault();
+                var valores = {
+                    "codigo": $('#cod-produto').val()
+                };
+                $.post('{{ path('pesquisar_produto') }}', valores, function (retorno) {
+                    if(retorno.status == 'ok'){
+                        $('#desc-produto').removeClass('hide');
+                        $('#alerta').addClass('hide');
+                        listagemProdutos();
+                        /*$.getJSON(retorno, function(data){
+                            var alerta = data.status;
+                            alert(alerta);
+                        });*/
+                    }else{
+                        $('#desc-produto').addClass('hide');
+                        $('#alerta').removeClass('hide');
+                    }
+                });
+            });
+        });
+        function listagemProdutos()
+        {
+            $('#lista-produtos').empty();
+            $.getJSON('{{ path('listagem') }}',function(retorno){
+                var total = 0;
+                retorno.forEach(function(el,ind){
+                   var li = $('<li>'+el.codigo+' - '+el.descricao+' - '+el.valor+'</li>') ;
+                   $('#lista-produtos').append(li);
+                   
+                   total +=parseFloat(el.valor);
+                });
+               $('#valor-total').html(total.toFixed(2));
+            });
+            
+            
+            
+            
+            
+        }
+    </script>
 {% endblock %}

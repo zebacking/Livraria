@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\Table(name="produtos")
  */
-class Produtos 
+class Produtos implements \JsonSerializable 
 {
     /**
      * @ORM\Column(type="integer")
@@ -223,4 +223,23 @@ class Produtos
     {
         return $this->genero;
     }
+    
+    public function jsonSerialize() {
+        return array(
+            "nome" => $this->getNome(),
+            "tipo" => $this->getTipo(),
+            "preco" => $this->getPreco(),
+            "imagem" => $this->getImagem(),
+            "genero" => $this->getGenero()->getNome()
+        );
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
 }
