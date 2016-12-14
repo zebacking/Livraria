@@ -36,7 +36,9 @@
 
 
                     <li><a href="{{ path('caixa-pdv') }}">Caixa</a></li>
-                    <li><a href="#">Usuários</a></li>
+                    <li><a href="{{ logout_path(key = null) }}">{{ app.user.nome }}</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">Sair</a></li>
+                    
                 </ul>
                 <form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Procurar...">
